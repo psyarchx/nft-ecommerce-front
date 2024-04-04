@@ -8,10 +8,12 @@ const ProductPage = () => {
 
   // Mock product details, adjust as necessary for your application
   const productDetails = {
-    name: "Iphone pro max dos caralho celular horrivel da porra",
-    brand: "Apple",
-    price: "99.99",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    name: "Lumixar - AstraZen 5G, dual camera, 128GB, Dual SIM, 6.5'",
+    brand: "Lumixar",
+    priceBefore: "999.99",
+    priceNow: "799.99",
+    un: 1,
+    description: "O Lumixar AstraZen 5G combina elegância e tecnologia de ponta com sua dupla câmera de alta definição, 128GB de armazenamento e suporte Dual SIM. Sua tela de 6.5 polegadas proporciona uma experiência visual imersiva, enquanto a conectividade 5G garante velocidade ultrarrápida, mantendo você sempre conectado. Ideal para aqueles que valorizam desempenho, capacidade de armazenamento e a conveniência de gerenciar duas linhas em um único aparelho, o AstraZen 5G redefine o que esperamos de um smartphone moderno."
   };
 
   const handlePurchase = async () => {
@@ -57,12 +59,15 @@ const ProductPage = () => {
         <S.ProductTitle>{productDetails.name}</S.ProductTitle>
         <S.BrandText>Marca: {productDetails.brand}</S.BrandText>
         <S.Divider />
-        <S.ProductPrice>Preço: ${productDetails.price}</S.ProductPrice>
+        <S.PriceBefore>Preço: ${productDetails.priceBefore}</S.PriceBefore>
+        <S.ProductPrice>Preço: ${productDetails.priceNow}</S.ProductPrice>
+        <S.Unities>Unidades: {productDetails.un}</S.Unities>
+        <S.Divider />
         <S.ProductDescription>
           {productDetails.description}
         </S.ProductDescription>
         <S.Divider />
-        <S.BuyButton onClick={handlePurchase}>Buy Now</S.BuyButton>
+        <S.BuyButton onClick={handlePurchase}>Comprar</S.BuyButton>
         {mintSuccess && <p>Metadados atualizados com sucesso!</p>}
       </S.DescripsContainer>
     </S.ProductContainer>
