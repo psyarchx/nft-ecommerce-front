@@ -96,3 +96,9 @@ export const Unities = styled.p`
   color: #454545;
   font-weight: bold;
 `;
+
+export const ErrorText = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+`;

@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios'; // Ensure axios is installed for HTTP requests
 import * as S from './styles';
 import phoneImage from '../../assets/phone.png';
+import LoadingOverlay from '../LoadingOverlay';
+import { useEffect } from 'react';
 
-const ProductPage = () => {
-  const [mintSuccess, setMintSuccess] = useState(false);
+const ProductPage = ({ setMintSuccess }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   // Mock product details, adjust as necessary for your application
   const productDetails = {
@@ -18,10 +21,12 @@ const ProductPage = () => {
 
   const handlePurchase = async () => {
     // Create a FormData object to package the name, description, and image file
+    setIsLoading(true);
+    
     const formData = new FormData();
     formData.append('name', productDetails.name);
     formData.append('description', productDetails.description);
-  
+
     try {
       // Fetch the image from its URL
       const imageResponse = await fetch(phoneImage);
@@ -47,30 +52,34 @@ const ProductPage = () => {
     } catch (error) {
       console.error('There was an error processing the purchase:', error);
       setMintSuccess(false);
+      setError(true);
     }
   };
 
   return (
-    <S.ProductContainer>
-      <S.ImageContainer>
-        <S.ProductImage src={phoneImage} alt="Product Image" />
-      </S.ImageContainer>
-      <S.DescripsContainer>
-        <S.ProductTitle>{productDetails.name}</S.ProductTitle>
-        <S.BrandText>Marca: {productDetails.brand}</S.BrandText>
-        <S.Divider />
-        <S.PriceBefore>Preço: ${productDetails.priceBefore}</S.PriceBefore>
-        <S.ProductPrice>Preço: ${productDetails.priceNow}</S.ProductPrice>
-        <S.Unities>Unidades: {productDetails.un}</S.Unities>
-        <S.Divider />
-        <S.ProductDescription>
-          {productDetails.description}
-        </S.ProductDescription>
-        <S.Divider />
-        <S.BuyButton onClick={handlePurchase}>Comprar</S.BuyButton>
-        {mintSuccess && <p>Metadados atualizados com sucesso!</p>}
-      </S.DescripsContainer>
-    </S.ProductContainer>
+    <>
+      <S.ProductContainer>
+        <S.ImageContainer>
+          <S.ProductImage src={phoneImage} alt="Product Image" />
+        </S.ImageContainer>
+        <S.DescripsContainer>
+          <S.ProductTitle>{productDetails.name}</S.ProductTitle>
+          <S.BrandText>Marca: {productDetails.brand}</S.BrandText>
+          <S.Divider />
+          <S.PriceBefore>Preço: ${productDetails.priceBefore}</S.PriceBefore>
+          <S.ProductPrice>Preço: ${productDetails.priceNow}</S.ProductPrice>
+          <S.Unities>Unidades: {productDetails.un}</S.Unities>
+          <S.Divider />
+          <S.ProductDescription>
+            {productDetails.description}
+          </S.ProductDescription>
+          <S.Divider />
+          <S.BuyButton onClick={handlePurchase}>Comprar</S.BuyButton>
+          {error && <S.ErrorText>Houve um erro no processamento do pedido. Tente novamente mais tarde</S.ErrorText>}
+        </S.DescripsContainer>
+      </S.ProductContainer>
+      {isLoading === true ? <LoadingOverlay message="Processando compra..." /> : null}
+    </>
   );
 };
 
