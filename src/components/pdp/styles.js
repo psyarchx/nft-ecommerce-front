@@ -97,6 +97,13 @@ export const Unities = styled.p`
   font-weight: bold;
 `;
 
+export const Serial = styled.p`
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: #454545;
+  font-weight: bold;
+`;
+
 export const ErrorText = styled.p`
   color: red;
   font-size: 14px;

@@ -5,7 +5,7 @@ import { faSearch, faList, faUser, faShoppingCart } from "@fortawesome/free-soli
 const Navbar = () => {
     return (
         <S.HeaderContainer>
-            <S.Logo>NFT Marketplace</S.Logo>
+            <S.Logo>E-ACME</S.Logo>
             <S.SearchBarContainer>
                 <S.SearchInput />
                 <S.SearchButton><S.CustomIconSearchBar icon={faSearch}/></S.SearchButton>

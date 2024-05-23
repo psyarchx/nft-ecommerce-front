@@ -10,7 +10,7 @@ const Breadcrumbs = () => {
         <span>Home</span>
       </S.HomeWrapper>
       <S.Separator>&gt;</S.Separator>
-      <span>Product</span>
+      <span>Produto</span>
     </S.BreadcrumbsContainer>
   );
 };
